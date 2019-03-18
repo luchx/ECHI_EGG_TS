@@ -18,6 +18,22 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  config.view = {
+    defaultViewEngine: "nunjucks",
+    mapping: {
+      ".tpl": "nunjucks"
+    }
+  };
+
+  config.cors = {
+    allowMethods: "GET,HEAD,PUT,OPTIONS,POST,DELETE,PATCH"
+  };
+
+  config.oAuth2Server = {
+    grants: ["password"],
+    expires: 60
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

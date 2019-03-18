@@ -6,9 +6,24 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
-};
-
-exports.mysql = {
-  enable: true,
-  package: 'egg-mysql',
+  nunjucks: {
+    enable: true,
+    package: "egg-view-nunjucks"
+  },
+  validate: {
+    enable: true,
+    package: "egg-validate"
+  },
+  mysql: {
+    enable: true,
+    package: "egg-mysql"
+  },
+  cors: {
+    enable: true,
+    package: "egg-cors"
+  },
+  oAuth2Server: {
+    enable: true,
+    package: "egg-oauth2-server"
+  }
 };

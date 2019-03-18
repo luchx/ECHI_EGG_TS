@@ -5,5 +5,6 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/', controller.home.index);
+  router.get('/', controller.client.index);
+  router.get('/api/login/getCode/:phone', controller.login.getCode);
 };
