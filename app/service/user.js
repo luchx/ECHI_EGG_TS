@@ -2,13 +2,18 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
     async find(phone) {
-        const post = await this.app.mysql.get('e_user', {
+        let result = await this.app.mysql.get('e_user', {
             phone
         });
-        console.log(post)
-        return {
-            post
-        }
+        return result
+    }
+
+    async create(phone, password) {
+        let result = await this.app.mysql.insert('e_user', {
+            phone,
+            password
+        });
+        return result
     }
 }
 

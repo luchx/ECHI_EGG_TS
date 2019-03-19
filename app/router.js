@@ -5,6 +5,8 @@
  */
 module.exports = app => {
   const { router, controller } = app;
+  console.log(app.oAuth2Server);
   router.get('/', controller.client.index);
-  router.get('/api/login/getCode', controller.login.getCode);
+  router.get('/api/user/getCode', controller.user.getCode);
+  router.post('/api/user/register', controller.user.register);
 };

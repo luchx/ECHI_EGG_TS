@@ -9,7 +9,7 @@ module.exports = app => {
       const data = {
         name: 'egg'
       };
-      await ctx.render('public/index.html', data);
+      await ctx.render('/index.html', data);
     }
   }
   return ClientController;

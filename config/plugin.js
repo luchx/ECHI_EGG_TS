@@ -10,9 +10,9 @@ module.exports = {
     enable: true,
     package: "egg-view-nunjucks"
   },
-  validate: {
+  validatePlus: {
     enable: true,
-    package: "egg-validate"
+    package: "egg-validate-plus"
   },
   mysql: {
     enable: true,
