@@ -1,15 +1,15 @@
 const Service = require('egg').Service;
 
-class UserService extends Service {
+class MemberService extends Service {
     async find(phone) {
-        let result = await this.app.mysql.get('e_user', {
+        let result = await this.app.mysql.get('e_member', {
             phone
         });
         return result
     }
 
     async create(phone, password) {
-        let result = await this.app.mysql.insert('e_user', {
+        let result = await this.app.mysql.insert('e_member', {
             phone,
             password
         });
@@ -17,4 +17,4 @@ class UserService extends Service {
     }
 }
 
-module.exports = UserService;
+module.exports = MemberService;

@@ -3,7 +3,7 @@
 const Controller = require('egg').Controller;
 var crypto = require('crypto');
 
-class UserController extends Controller {
+class MemberController extends Controller {
   // 获取用户验证码
   async getCode() {
     const {
@@ -12,7 +12,7 @@ class UserController extends Controller {
     let {
       phone
     } = ctx.query;
-    const validateResult = await ctx.validate('user.getCode', {
+    const validateResult = await ctx.validate('member.getCode', {
       phone
     });
     if (!validateResult) {
@@ -30,7 +30,7 @@ class UserController extends Controller {
       phone,
       code
     } = ctx.request.body;
-    const validateResult = await ctx.validate('user.register', {
+    const validateResult = await ctx.validate('member.register', {
       phone,
       code
     });
@@ -38,12 +38,12 @@ class UserController extends Controller {
       return;
     }
     const Md5Pass = crypto.createHash('md5').update(code).digest('hex');
-    let user = await ctx.service.user.find(phone);
-    if (!user) {
-      user = await ctx.service.user.create(phone, Md5Pass);
+    let member = await ctx.service.member.find(phone);
+    if (!member) {
+      member = await ctx.service.member.create(phone, Md5Pass);
     }
     ctx.returnBody('请求成功');
   }
 }
 
-module.exports = UserController;
+module.exports = MemberController;
