@@ -42,7 +42,7 @@ class MemberController extends Controller {
     if (!member) {
       member = await ctx.service.member.create(phone, Md5Pass);
     }
-    ctx.returnBody('请求成功');
+    ctx.returnBody('请求成功', {id: member.id});
   }
 }
 

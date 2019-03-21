@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const dayjs = require('dayjs');
 
 class MemberService extends Service {
     async find(phone) {
@@ -11,7 +12,8 @@ class MemberService extends Service {
     async create(phone, password) {
         let result = await this.app.mysql.insert('e_member', {
             phone,
-            password
+            password,
+            register_time: dayjs().format('YYYY-MM-DD HH:mm:ss')
         });
         return result
     }
