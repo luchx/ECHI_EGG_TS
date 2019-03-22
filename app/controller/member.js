@@ -38,11 +38,25 @@ class MemberController extends Controller {
       return;
     }
     const Md5Pass = crypto.createHash('md5').update(code).digest('hex');
-    let member = await ctx.service.member.find(phone);
+    let member = await ctx.service.member.findByPhone(phone);
     if (!member) {
       member = await ctx.service.member.create(phone, Md5Pass);
     }
     ctx.returnBody('请求成功', {id: member.id});
+  }
+
+  // 获取用户信息
+  async getInfo() {
+    const {
+      ctx
+    } = this;
+    let {
+      memberId
+    } = ctx.params;
+    let member = await ctx.service.member.findById(memberId);
+    ctx.returnBody('请求成功', {
+      member
+    });
   }
 }
 

@@ -2,7 +2,7 @@ const Service = require('egg').Service;
 const dayjs = require('dayjs');
 
 class MemberService extends Service {
-    async find(phone) {
+    async findByPhone(phone) {
         let result = await this.app.mysql.get('e_member', {
             phone
         });
@@ -14,6 +14,13 @@ class MemberService extends Service {
             phone,
             password,
             register_time: dayjs().format('YYYY-MM-DD HH:mm:ss')
+        });
+        return result
+    }
+
+    async findById(id) {
+        let result = await this.app.mysql.get('e_member', {
+            id
         });
         return result
     }

@@ -9,4 +9,5 @@ module.exports = app => {
   router.get('/', controller.client.index);
   router.get('/api/member/getCode', controller.member.getCode);
   router.post('/api/member/register', controller.member.register);
+  router.get('/api/member/getInfo/:memberId', controller.member.getInfo);
 };
