@@ -1,0 +1,18 @@
+import { Service } from 'egg';
+
+/**
+ * Test Service
+ */
+export default class Test extends Service {
+  public async index() {
+    return `hi, 123`;
+  }
+
+  /**
+   * sayHi to you
+   * @param name - your name
+   */
+  public async sayHi(name: string) {
+    return `hi, ${name}`;
+  }
+}
