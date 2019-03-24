@@ -11,6 +11,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-sequelize',
   },
+  validatePlus: {
+    enable: true,
+    package: 'egg-validate-plus',
+  }
 };
 
 export default plugin;

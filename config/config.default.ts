@@ -32,6 +32,7 @@ export default (appInfo: EggAppInfo) => {
   // app special config
   config.sourceUrl = `https://github.com/eggjs/examples/tree/master/${appInfo.name}`;
 
+  // 配置数据库
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'echidb',
@@ -41,6 +42,20 @@ export default (appInfo: EggAppInfo) => {
     password: 'root',
 
     tablePrefix: 'echi_',
+  };
+
+  // 配置表单校验错误处理
+  config.validatePlus = {
+    resolveError(ctx, errors) {
+      if (errors.length) {
+        ctx.status = 400;
+        ctx.body = {
+          code: 400,
+          error: errors,
+          message: '参数错误',
+        };
+      }
+    }
   };
 
   config.apiPrefix = '/api';
