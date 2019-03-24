@@ -1,0 +1,105 @@
+import {
+  Service
+} from 'egg';
+import {
+  TestPhone
+} from '../utils/validator';
+
+/**
+ * Member Service
+ */
+export default class Member extends Service {
+
+  /**
+   * 获取验证码
+   * 
+   * @param {string} phone
+   * @returns
+   * @memberof Member
+   */
+  public async getCode(phone: string) {
+    const {
+      ctx
+    } = this;
+    const rule = {
+      phone: [{
+          required: true,
+          message: '请输入您的手机号码'
+        },
+        {
+          validator: (_rule, value, callback) => {
+            if (!value || TestPhone(value)) {
+              callback();
+            } else {
+              callback('请输入正确的手机号码');
+            }
+          }
+        }
+      ]
+    }
+    const result = await ctx.validate(rule, {
+      phone
+    });
+    if (!result) {
+      return;
+    }
+    ctx.success('请求成功', '1234');
+  }
+
+  /**
+   * 登录
+   * 
+   * @param {string} phone
+   * @param {string} code
+   * @returns
+   * @memberof Member
+   */
+  public async login(phone: string, code: string) {
+    const {
+      ctx
+    } = this;
+    const rule = {
+      phone: [{
+          required: true,
+          message: '请输入您的手机号码'
+        },
+        {
+          validator: (_rule, value, callback) => {
+            if (!value || TestPhone(value)) {
+              callback();
+            } else {
+              callback('请输入正确的手机号码');
+            }
+          }
+        }
+      ],
+      code: {
+        required: true,
+        message: '请输入您的手机号码'
+      }
+    }
+    let result = await ctx.validate(rule, {
+      phone,
+      code
+    });
+    if (!result) {
+      return;
+    }
+    return await ctx.model.Member.findOrCreate({
+      where: {
+        phone
+      },
+      defaults: {
+        phone,
+        password: code,
+        username: phone,
+        nickname: phone,
+      }
+    }).spread((user: any, created) => {
+      ctx.success('请求成功', {
+        id: user.id,
+        created
+      });
+    });
+  }
+}

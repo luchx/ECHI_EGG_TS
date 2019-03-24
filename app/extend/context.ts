@@ -6,13 +6,13 @@ import { Context } from 'egg';
  * @export
  * @param {*} message
  * @param {*} [data=null]
- * @param {number} [code=0]
+ * @param {number} [status=0]
  */
 export function success(this: Context, message, data = null) {
     this.body = {
         message,
         data,
-        code: 0
+        status: true
     };
     this.status = 200;
 }
@@ -23,12 +23,12 @@ export function success(this: Context, message, data = null) {
  * @export
  * @param {*} message
  * @param {*} [data=null]
- * @param {number} [code]
+ * @param {number} [status]
  */
-export function fail(this: Context, message, code, data = null) {
+export function fail(this: Context, message, data = null) {
     this.body = {
         message,
         data,
-        code
+        status: false
     };
 }

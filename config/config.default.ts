@@ -1,7 +1,11 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import {
+  EggAppConfig,
+  EggAppInfo,
+  PowerPartial
+} from 'egg';
 
 // for config.{env}.ts
-export type DefaultConfig = PowerPartial<EggAppConfig & IBizConfig>;
+export type DefaultConfig = PowerPartial < EggAppConfig & IBizConfig > ;
 
 // app special config scheme
 export interface IBizConfig {
@@ -20,7 +24,7 @@ export interface IBizConfig {
 }
 
 export default (appInfo: EggAppInfo) => {
-  const config = {} as PowerPartial<EggAppConfig> & IBizConfig;
+  const config = {} as PowerPartial < EggAppConfig > & IBizConfig;
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
@@ -50,7 +54,7 @@ export default (appInfo: EggAppInfo) => {
       if (errors.length) {
         ctx.status = 400;
         ctx.body = {
-          code: 400,
+          status: false,
           error: errors,
           message: '参数错误',
         };
@@ -59,6 +63,18 @@ export default (appInfo: EggAppInfo) => {
   };
 
   config.apiPrefix = '/api';
+
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
+    },
+    domainWhiteList: ['http://localhost:3001']
+  };
+
+  config.cors = {
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
 
   // the return config will combines to EggAppConfig
   return {

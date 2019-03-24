@@ -14,6 +14,10 @@ const plugin: EggPlugin = {
   validatePlus: {
     enable: true,
     package: 'egg-validate-plus',
+  },
+  cors: {
+    enable: true,
+    package: "egg-cors"
   }
 };
 

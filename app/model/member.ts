@@ -4,97 +4,67 @@
  * 会员表
  */
 import { Application } from 'egg';
-import { MEDIUMINT, STRING, TINYINT, INTEGER } from 'sequelize';
+import { MEDIUMINT, STRING, TINYINT, DATE } from 'sequelize';
 
 export default (app: Application) => {
   const sequelize = app.model;
+  const tablePrefix = sequelize.options['tablePrefix'];
 
-  const Member = sequelize.define('user', {
+  const Member = sequelize.define(tablePrefix + 'member', {
     id: {
       type: MEDIUMINT(8).UNSIGNED,
-      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
 
     username: {
       type: STRING(60),
-      allowNull: false,
       defaultValue: '',
+      allowNull: false,
       unique: true,
+      comment: '用户名称'
     },
 
     password: {
       type: STRING(32),
       allowNull: false,
       defaultValue: '',
+      comment: '用户密码'
     },
 
     gender: {
       type: TINYINT(1).UNSIGNED,
-      allowNull: false,
-      defaultValue: 0,
+      defaultValue: 2,
+      comment: '性别'
     },
 
     birthday: {
-      type: INTEGER(11).UNSIGNED,
-      allowNull: false,
-      defaultValue: 0,
-    },
-
-    register_time: {
-      type: INTEGER(11).UNSIGNED,
-      allowNull: false,
-      defaultValue: 0,
-    },
-
-    last_login_time: {
-      type: INTEGER(11).UNSIGNED,
-      allowNull: false,
-      defaultValue: 0,
-    },
-
-    last_login_ip: {
-      type: STRING(15),
-      allowNull: false,
-      defaultValue: '',
-    },
-
-    user_level_id: {
-      type: TINYINT(3).UNSIGNED,
-      allowNull: false,
-      defaultValue: 0,
+      type: DATE,
+      comment: '生日'
     },
 
     nickname: {
       type: STRING(60),
       allowNull: false,
+      comment: '昵称'
     },
 
-    mobile: {
+    phone: {
       type: STRING(20),
       allowNull: false,
-    },
-
-    register_ip: {
-      type: STRING(45),
-      allowNull: false,
-      defaultValue: '',
+      comment: '手机号码'
     },
 
     avatar: {
       type: STRING(255),
-      allowNull: false,
-      defaultValue: '',
-    },
-
-    weixin_openid: {
-      type: STRING(50),
-      allowNull: false,
-      defaultValue: '',
+      defaultValue: 'https://s11.mogucdn.com/mlcdn/c45406/181105_60bdj928jdhjg9ehhg58hje1212ek_640x640.jpg',
+      comment: '用户头像'
     },
   }, {
-      timestamps: false,
+      timestamps: true,
+      underscored: true,  // 将驼峰式解析为下划线连接
+      paranoid: true,
+      freezeTableName: true,
       charset: 'utf8mb4',
       initialAutoIncrement: '14',
     });

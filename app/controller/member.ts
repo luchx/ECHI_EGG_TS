@@ -3,37 +3,40 @@ import {
 } from 'egg';
 
 export default class MemberController extends Controller {
+
+  /**
+   * 获取验证码
+   *
+   * @query {string} phone
+   * @returns
+   * @memberof MemberController
+   */
   public async getCode() {
     const {
       ctx
     } = this;
-    // const rule = {
-    //   id: [{
-    //       required: true
-    //     },
-    //     {
-    //       type: 'number',
-    //       message: 'id 必须为数字'
-    //     }
-    //   ],
-    //   password: [{
-    //       required: true
-    //     },
-    //     {
-    //       type: 'string',
-    //       message: 'password 必须为字符串'
-    //     }
-    //   ]
-    // }
-    // let queryRule = {
-    //   username: 123456,
-    //   password: 'abcdefg'
-    // }
+    const {
+      phone
+    } = ctx.query;
+    return await ctx.service.member.getCode(phone);
+  }
 
-    // const validateResult = await ctx.validate(rule, queryRule);
-    // if (!validateResult) {
-    //   return;
-    // }
-    ctx.success('请求成功', '1234');
+  /**
+   * 登录
+   *
+   * @requestBody {string} phone
+   * @requestBody {string} code
+   * @returns
+   * @memberof MemberController
+   */
+  public async login() {
+    const {
+      ctx
+    } = this;
+    const {
+      phone,
+      code
+    } = ctx.request.body;
+    return await ctx.service.member.login(phone, code);
   }
 }
