@@ -32,17 +32,6 @@ export default (app: Application) => {
       comment: '用户密码'
     },
 
-    gender: {
-      type: TINYINT(1).UNSIGNED,
-      defaultValue: 2,
-      comment: '性别'
-    },
-
-    birthday: {
-      type: DATE,
-      comment: '生日'
-    },
-
     nickname: {
       type: STRING(60),
       allowNull: false,
@@ -53,6 +42,33 @@ export default (app: Application) => {
       type: STRING(20),
       allowNull: false,
       comment: '手机号码'
+    },
+
+    gender: {
+      type: TINYINT(1).UNSIGNED,
+      defaultValue: 2,
+      comment: '性别'
+    },
+
+    genderDisplay: {
+      type: STRING(10),
+      defaultValue: '未知',
+      comment: '性别'
+    },
+
+    birthday: {
+      type: DATE,
+      comment: '生日'
+    },
+
+    shoeSize: {
+      type: TINYINT(100).UNSIGNED,
+      comment: '鞋码'
+    },
+
+    seatHeight: {
+      type: TINYINT(10).UNSIGNED,
+      comment: '座椅高度'
     },
 
     avatar: {

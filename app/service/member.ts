@@ -102,4 +102,47 @@ export default class Member extends Service {
       });
     });
   }
+
+  /**
+  * 获取用户信息
+  * 
+  * @param {string} memberId
+  * @returns
+  * @memberof Member
+  */
+  public async getInfo(memberId: string) {
+    const {
+      ctx
+    } = this;
+    const result = await ctx.model.Member.findOne({
+      where: { id: memberId }
+    });
+    if (!result) {
+      ctx.fail('对不起,查无此用户信息');
+      return;
+    }
+    ctx.success(null, result);
+  }
+
+  /**
+  * 修改用户信息
+  * 
+  * @param {string} memberId
+  * @returns
+  * @memberof Member
+  */
+  public async modify(query, modifyValue) {
+    const {
+      ctx
+    } = this;
+    const result = await ctx.model.Member.update(modifyValue, {
+      where: query
+    });
+    if (!result.length) {
+      ctx.fail('修改失败');
+      return;
+    }
+    ctx.success('修改成功');
+  }
+
 }

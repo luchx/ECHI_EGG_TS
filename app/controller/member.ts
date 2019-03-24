@@ -39,4 +39,38 @@ export default class MemberController extends Controller {
     } = ctx.request.body;
     return await ctx.service.member.login(phone, code);
   }
+
+  /**
+   * 获取用户信息
+   * 
+   * @params {string} memberId
+   * @returns
+   * @memberof MemberController
+   */
+  public async getInfo() {
+    const {
+      ctx
+    } = this;
+    const {
+      memberId
+    } = ctx.params;
+    return await ctx.service.member.getInfo(memberId);
+  }
+
+  /**
+   * 修改用户信息
+   * 
+   * @params {string} memberId
+   * @returns
+   * @memberof MemberController
+   */
+  public async modify() {
+    const {
+      ctx
+    } = this;
+    const {
+      id
+    } = ctx.request.body;
+    return await ctx.service.member.modify({ id }, ctx.request.body);
+  }
 }

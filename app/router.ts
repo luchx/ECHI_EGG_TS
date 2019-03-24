@@ -7,5 +7,6 @@ export default (app: Application) => {
   router.get('/', controller.home.index);
   router.get(apiPrefix + '/member/getCode', controller.member.getCode);
   router.post(apiPrefix + '/member/login', controller.member.login);
-  // router.get('/api/member/getInfo/:memberId', controller.member.getInfo);
+  router.get(apiPrefix + '/member/getInfo/:memberId', controller.member.getInfo);
+  router.put(apiPrefix + '/member/modify', controller.member.modify);
 };
