@@ -50,7 +50,7 @@ export default (app: Application) => {
       comment: '性别'
     },
 
-    genderDisplay: {
+    gender_display: {
       type: STRING(10),
       defaultValue: '未知',
       comment: '性别'
@@ -61,12 +61,12 @@ export default (app: Application) => {
       comment: '生日'
     },
 
-    shoeSize: {
+    shoe_size: {
       type: TINYINT(100).UNSIGNED,
       comment: '鞋码'
     },
 
-    seatHeight: {
+    seat_height: {
       type: TINYINT(10).UNSIGNED,
       comment: '座椅高度'
     },
