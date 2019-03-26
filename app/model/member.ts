@@ -26,7 +26,7 @@ export default (app: Application) => {
     },
 
     password: {
-      type: STRING(32),
+      type: STRING(100),
       allowNull: false,
       defaultValue: '',
       comment: '用户密码'
