@@ -1,8 +1,6 @@
 /*
- * @Author: qiao
- * @Date: 2018-07-01 11:15:47
- * @Last Modified by: qiao
- * @Last Modified time: 2018-07-17 15:13:54
+ * @Author: Echi
+ * @Date: 2019-03-24
  * app启动文件，用于自定义启动时的初始化工作,只返回一个函数
  */
 import { Application } from 'egg';

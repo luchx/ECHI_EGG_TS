@@ -48,19 +48,26 @@ export default (appInfo: EggAppInfo) => {
     tablePrefix: 'echi_',
   };
 
-  // 配置表单校验错误处理
-  config.validatePlus = {
-    resolveError(ctx, errors) {
-      if (errors.length) {
-        ctx.status = 400;
-        ctx.body = {
-          status: false,
-          error: errors,
-          message: '参数错误',
-        };
+  config.view = {
+      defaultViewEngine: 'nunjucks',
+      mapping: {
+        '.html': 'nunjucks',
+      },
+    },
+
+    // 配置表单校验错误处理
+    config.validatePlus = {
+      resolveError(ctx, errors) {
+        if (errors.length) {
+          ctx.status = 400;
+          ctx.body = {
+            status: false,
+            error: errors,
+            message: '参数错误',
+          };
+        }
       }
-    }
-  };
+    };
 
   config.apiPrefix = '/api';
 

@@ -14,6 +14,7 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
+import 'egg-view-nunjucks';
 import 'egg-sequelize';
 import 'egg-validate-plus';
 import 'egg-cors';
@@ -32,6 +33,7 @@ declare module 'egg' {
     static?: EggPluginItem;
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
+    nunjucks?: EggPluginItem;
     sequelize?: EggPluginItem;
     validatePlus?: EggPluginItem;
     cors?: EggPluginItem;
