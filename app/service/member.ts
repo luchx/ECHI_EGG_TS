@@ -4,6 +4,7 @@ import {
 import {
   TestPhone
 } from '../utils/validator';
+const crypto = require('crypto');
 
 /**
  * Member Service
@@ -85,13 +86,15 @@ export default class Member extends Service {
     if (!result) {
       return;
     }
+    const MD5 = crypto.createHash('md5');
+    const password = MD5.update(code).digest('hex');
     return await ctx.model.Member.findOrCreate({
       where: {
         phone
       },
       defaults: {
         phone,
-        password: code,
+        password,
         username: phone,
         nickname: phone,
       }

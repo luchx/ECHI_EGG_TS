@@ -50,7 +50,7 @@ export default (app: Application) => {
       comment: '性别'
     },
 
-    gender_display: {
+    genderDisplay: {
       type: STRING(10),
       defaultValue: '未知',
       comment: '性别'
@@ -61,12 +61,12 @@ export default (app: Application) => {
       comment: '生日'
     },
 
-    shoe_size: {
+    shoeSize: {
       type: TINYINT(100).UNSIGNED,
       comment: '鞋码'
     },
 
-    seat_height: {
+    seatHeight: {
       type: TINYINT(10).UNSIGNED,
       comment: '座椅高度'
     },
@@ -78,11 +78,9 @@ export default (app: Application) => {
     },
   }, {
       timestamps: true,
-      underscored: true,  // 将驼峰式解析为下划线连接
       paranoid: true,
       freezeTableName: true,
-      charset: 'utf8mb4',
-      initialAutoIncrement: '14',
+      charset: 'utf8mb4'
     });
 
   return Member;
