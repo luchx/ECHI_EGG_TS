@@ -1,10 +1,14 @@
-# hackernews-async-ts
+# egg-ts-project
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+> 用于学习node框架egg.js的项目
 
-## QuickStart
+## 快速入门
 
-### Development
+<!-- 在此次添加使用文档 -->
+
+如需进一步了解，参见 [egg 文档][egg]。
+
+### 本地开发
 
 ```bash
 $ npm i
@@ -12,22 +16,24 @@ $ npm run dev
 $ open http://localhost:7001/
 ```
 
-Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
-
-### Deploy
+### 部署
 
 ```bash
-$ npm run tsc
 $ npm start
+$ npm stop
 ```
 
-### Npm Scripts
+### 单元测试
 
-- Use `npm run lint` to check code style
-- Use `npm test` to run unit test
-- se `npm run clean` to clean compiled js at development mode once
+- [egg-bin] 内置了 [mocha], [thunk-mocha], [power-assert], [istanbul] 等框架，让你可以专注于写单元测试，无需理会配套工具。
+- 断言库非常推荐使用 [power-assert]。
+- 具体参见 [egg 文档 - 单元测试](https://eggjs.org/zh-cn/core/unittest)。
 
-### Requirement
+### 内置指令
 
-- Node.js 8.x
-- Typescript 2.8+
+- 使用 `npm run lint` 来做代码风格检查。
+- 使用 `npm test` 来执行单元测试。
+- 使用 `npm run autod` 来自动检测依赖更新，详细参见 [autod](https://www.npmjs.com/package/autod) 。
+
+
+[egg]: https://eggjs.org

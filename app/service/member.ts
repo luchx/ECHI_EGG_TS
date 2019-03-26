@@ -10,6 +10,10 @@ const bcrypt = require('bcryptjs');
  * Member Service
  */
 export default class Member extends Service {
+  public async hashPassword(password) {
+    const salt = bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(password, salt);
+  }
 
   /**
    * 获取验证码
@@ -86,15 +90,13 @@ export default class Member extends Service {
     if (!result) {
       return;
     }
-    const salt = bcrypt.genSaltSync(10);
-    const password = bcrypt.hashSync(code, salt);
     return await ctx.model.Member.findOrCreate({
       where: {
         phone
       },
       defaults: {
         phone,
-        password,
+        password: this.hashPassword(code),
         username: phone,
         nickname: phone,
       }
@@ -147,5 +149,4 @@ export default class Member extends Service {
     }
     ctx.success('修改成功');
   }
-
 }

@@ -6,6 +6,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-view-nunjucks',
   },
+  oAuth2Server: {
+    enable: true,
+    package: 'egg-oauth2-server',
+  },
   sequelize: {
     enable: true,
     package: 'egg-sequelize',

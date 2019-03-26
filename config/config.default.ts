@@ -26,6 +26,11 @@ export interface IBizConfig {
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial < EggAppConfig > & IBizConfig;
 
+  // 配置静态文件请求
+  config.static = { 
+    prefix: '/',
+  }
+
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1553354059355_2088';
@@ -48,26 +53,33 @@ export default (appInfo: EggAppInfo) => {
     tablePrefix: 'echi_',
   };
 
-  config.view = {
-      defaultViewEngine: 'nunjucks',
-      mapping: {
-        '.html': 'nunjucks',
-      },
-    },
+  // 配置oAuth2.0
+  config.oAuth2Server = {
+    debug: true,
+    grants: ['password', 'authorization_code', 'refresh_token']
+  }
 
-    // 配置表单校验错误处理
-    config.validatePlus = {
-      resolveError(ctx, errors) {
-        if (errors.length) {
-          ctx.status = 400;
-          ctx.body = {
-            status: false,
-            error: errors,
-            message: '参数错误',
-          };
-        }
+  // 配置页面渲染引擎
+  config.view = {
+    defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.html': 'nunjucks',
+    },
+  }
+
+  // 配置表单校验错误处理
+  config.validatePlus = {
+    resolveError(ctx, errors) {
+      if (errors.length) {
+        ctx.status = 400;
+        ctx.body = {
+          status: false,
+          error: errors,
+          message: '参数错误',
+        };
       }
-    };
+    }
+  };
 
   config.apiPrefix = '/api';
 
