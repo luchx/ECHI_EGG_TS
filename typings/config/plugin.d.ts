@@ -15,7 +15,6 @@ import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
 import 'egg-view-nunjucks';
-import 'egg-oauth2-server';
 import 'egg-sequelize';
 import 'egg-validate-plus';
 import 'egg-cors';
@@ -35,7 +34,6 @@ declare module 'egg' {
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
     nunjucks?: EggPluginItem;
-    oAuth2Server?: EggPluginItem;
     sequelize?: EggPluginItem;
     validatePlus?: EggPluginItem;
     cors?: EggPluginItem;

@@ -73,4 +73,5 @@ export default class MemberController extends Controller {
     } = ctx.request.body;
     return await ctx.service.member.modify({ id }, ctx.request.body);
   }
+
 }

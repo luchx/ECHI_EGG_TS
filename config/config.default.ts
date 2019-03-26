@@ -24,7 +24,7 @@ export interface IBizConfig {
 }
 
 export default (appInfo: EggAppInfo) => {
-  const config = {} as PowerPartial < EggAppConfig > & IBizConfig;
+  const config = {} as PowerPartial<DefaultConfig>;
 
   // 配置静态文件请求
   config.static = { 
@@ -41,23 +41,7 @@ export default (appInfo: EggAppInfo) => {
   // app special config
   config.sourceUrl = `https://github.com/eggjs/examples/tree/master/${appInfo.name}`;
 
-  // 配置数据库
-  config.sequelize = {
-    dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'echidb',
-    host: 'localhost',
-    port: '3306',
-    username: 'root',
-    password: 'root',
-
-    tablePrefix: 'echi_',
-  };
-
-  // 配置oAuth2.0
-  config.oAuth2Server = {
-    debug: true,
-    grants: ['password', 'authorization_code', 'refresh_token']
-  }
+  config.apiPrefix = '/api';
 
   // 配置页面渲染引擎
   config.view = {
@@ -80,8 +64,18 @@ export default (appInfo: EggAppInfo) => {
       }
     }
   };
+  
+  // 配置数据库
+  config.sequelize = {
+    dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
+    database: 'echidb',
+    host: 'localhost',
+    port: '3306',
+    username: 'root',
+    password: 'root',
 
-  config.apiPrefix = '/api';
+    tablePrefix: 'echi_',
+  };
 
   config.security = {
     csrf: {
@@ -96,7 +90,5 @@ export default (appInfo: EggAppInfo) => {
   };
 
   // the return config will combines to EggAppConfig
-  return {
-    ...config,
-  };
+  return config;
 };
