@@ -4,7 +4,7 @@
  * 会员表
  */
 import { Application } from 'egg';
-import { MEDIUMINT, STRING, TINYINT, DATE } from 'sequelize';
+import { MEDIUMINT, STRING, TEXT, TINYINT, DATE } from 'sequelize';
 
 export default (app: Application) => {
   const sequelize = app.model;
@@ -72,7 +72,7 @@ export default (app: Application) => {
     },
 
     avatar: {
-      type: STRING(255),
+      type: TEXT,
       defaultValue: 'https://s11.mogucdn.com/mlcdn/c45406/181105_60bdj928jdhjg9ehhg58hje1212ek_640x640.jpg',
       comment: '用户头像'
     },

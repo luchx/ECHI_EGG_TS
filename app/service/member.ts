@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
  * Member Service
  */
 export default class Member extends Service {
-  public async hashPassword(password) {
+  public hashPassword(password) {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
   }
@@ -109,33 +109,46 @@ export default class Member extends Service {
   }
 
   /**
-  * 获取用户信息
-  * 
-  * @param {string} memberId
-  * @returns
-  * @memberof Member
-  */
+   * 获取用户信息
+   * 
+   * @param {string} memberId
+   * @returns
+   * @memberof Member
+   */
   public async getInfo(memberId: string) {
     const {
       ctx
     } = this;
-    const result = await ctx.model.Member.findOne({
-      where: { id: memberId }
+    const result: any = await ctx.model.Member.findOne({
+      where: {
+        id: memberId
+      }
     });
     if (!result) {
       ctx.fail('对不起,查无此用户信息');
       return;
     }
-    ctx.success(null, result);
+    ctx.success(null, {
+      avatar: result.avatar,
+      birthday: result.birthday,
+      gender: result.gender,
+      genderDisplay: result.genderDisplay,
+      id: result.id,
+      nickname: result.nickname,
+      phone: result.phone,
+      seatHeight: result.seatHeight,
+      shoeSize: result.shoeSize,
+      username: result.username,
+    });
   }
 
   /**
-  * 修改用户信息
-  * 
-  * @param {string} memberId
-  * @returns
-  * @memberof Member
-  */
+   * 修改用户信息
+   * 
+   * @param {string} memberId
+   * @returns
+   * @memberof Member
+   */
   public async modify(query, modifyValue) {
     const {
       ctx
