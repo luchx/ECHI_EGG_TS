@@ -4,6 +4,11 @@ import {
 
 export default class MemberController extends Controller {
 
+  // 获取当前日期的时间戳 
+  public async getTime() {
+    this.ctx.success(null, new Date().getTime());
+  }
+
   /**
    * 获取验证码
    *

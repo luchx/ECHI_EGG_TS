@@ -3,9 +3,11 @@
 
 import 'egg';
 import ExportMember from '../../../app/model/member';
+import ExportProject from '../../../app/model/project';
 
 declare module 'sequelize' {
   interface Sequelize {
     Member: ReturnType<typeof ExportMember>;
+    Project: ReturnType<typeof ExportProject>;
   }
 }
