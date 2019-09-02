@@ -1,11 +1,11 @@
 import {
   EggAppConfig,
   EggAppInfo,
-  PowerPartial
+  PowerPartial,
 } from 'egg';
 
 // for config.{env}.ts
-export type DefaultConfig = PowerPartial < EggAppConfig & IBizConfig > ;
+export type DefaultConfig = PowerPartial<EggAppConfig & IBizConfig>;
 
 // app special config scheme
 export interface IBizConfig {
@@ -15,7 +15,7 @@ export interface IBizConfig {
     dialect: string;
     database: string;
     host: string;
-    port: string;
+    port: number;
     username: string;
     password: string;
   };
@@ -25,9 +25,9 @@ export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<DefaultConfig>;
 
   // 配置静态文件请求
-  config.static = { 
+  config.static = {
     prefix: '/',
-  }
+  };
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
@@ -47,7 +47,7 @@ export default (appInfo: EggAppInfo) => {
     mapping: {
       '.html': 'nunjucks',
     },
-  }
+  };
 
   // 配置表单校验错误处理
   config.validatePlus = {
@@ -60,30 +60,31 @@ export default (appInfo: EggAppInfo) => {
           message: '参数错误',
         };
       }
-    }
+    },
   };
-  
+
   // 配置数据库
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'echidb',
     host: 'localhost',
-    port: '3306',
+    port: 3306,
     username: 'root',
-    password: 'root'
+    password: 'root',
   };
 
-  config.security = {
-    csrf: {
-      enable: false,
-      ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
-    },
-    domainWhiteList: ['http://localhost:3001']
-  };
+  // 配置跨域
+  // config.security = {
+  //   csrf: {
+  //     enable: false,
+  //     ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
+  //   },
+  //   domainWhiteList: [ 'http://localhost:3001' ],
+  // };
 
-  config.cors = {
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-  };
+  // config.cors = {
+  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  // };
 
   // the return config will combines to EggAppConfig
   return config;

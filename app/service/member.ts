@@ -1,10 +1,10 @@
 import {
-  Service
+  Service,
 } from 'egg';
 import {
-  TestPhone
+  TestPhone,
 } from '../utils/validator';
-const bcrypt = require('bcryptjs');
+import bcrypt = require('bcryptjs');
 
 /**
  * Member Service
@@ -17,33 +17,33 @@ export default class Member extends Service {
 
   /**
    * 获取验证码
-   * 
+   *
    * @param {string} phone
    * @returns
    * @memberof Member
    */
   public async getCode(phone: string) {
     const {
-      ctx
+      ctx,
     } = this;
     const rule = {
       phone: [{
           required: true,
-          message: '请输入您的手机号码'
+          message: '请输入您的手机号码',
         },
-        {
+              {
           validator: (_rule, value, callback) => {
             if (!value || TestPhone(value)) {
               callback();
             } else {
               callback('请输入正确的手机号码');
             }
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    };
     const result = await ctx.validate(rule, {
-      phone
+      phone,
     });
     if (!result) {
       return;
@@ -53,7 +53,7 @@ export default class Member extends Service {
 
   /**
    * 登录
-   * 
+   *
    * @param {string} phone
    * @param {string} code
    * @returns
@@ -61,68 +61,68 @@ export default class Member extends Service {
    */
   public async login(phone: string, code: string) {
     const {
-      ctx
+      ctx,
     } = this;
     const rule = {
       phone: [{
           required: true,
-          message: '请输入您的手机号码'
+          message: '请输入您的手机号码',
         },
-        {
+              {
           validator: (_rule, value, callback) => {
             if (!value || TestPhone(value)) {
               callback();
             } else {
               callback('请输入正确的手机号码');
             }
-          }
-        }
+          },
+        },
       ],
       code: {
         required: true,
-        message: '请输入您的手机号码'
-      }
-    }
-    let result = await ctx.validate(rule, {
+        message: '请输入您的手机号码',
+      },
+    };
+    const result = await ctx.validate(rule, {
       phone,
-      code
+      code,
     });
     if (!result) {
       return;
     }
     return await ctx.model.member.findOrCreate({
       where: {
-        phone
+        phone,
       },
       defaults: {
         phone,
         password: this.hashPassword(code),
         username: phone,
         nickname: phone,
-      }
+      },
     }).spread((user: any, created) => {
       ctx.success('请求成功', {
         id: user.id,
-        created
+        created,
       });
     });
   }
 
   /**
    * 获取用户信息
-   * 
+   *
    * @param {string} memberId
    * @returns
    * @memberof Member
    */
   public async getInfo(memberId: string) {
     const {
-      ctx
+      ctx,
     } = this;
     const result: any = await ctx.model.member.findOne({
       where: {
-        id: memberId
-      }
+        id: memberId,
+      },
     });
     if (!result) {
       ctx.fail('对不起,查无此用户信息');
@@ -144,17 +144,17 @@ export default class Member extends Service {
 
   /**
    * 修改用户信息
-   * 
+   *
    * @param {string} memberId
    * @returns
    * @memberof Member
    */
   public async modify(query, modifyValue) {
     const {
-      ctx
+      ctx,
     } = this;
     const result = await ctx.model.member.update(modifyValue, {
-      where: query
+      where: query,
     });
     if (!result.length) {
       ctx.fail('修改失败');

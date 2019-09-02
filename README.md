@@ -1,12 +1,14 @@
-# egg-ts-project
+# ECHI_EGG_TS
 
 > 用于学习node框架egg.js的项目
 
 ### 本地开发
 
 ```bash
-$ npm i
-$ npm run dev
+$ yarn install
+# 或 npm i
+$ yarn dev
+# 或 npm run dev
 $ open http://localhost:7001/
 ```
 
@@ -45,6 +47,29 @@ $ npm stop
 ### 数据库设计相关文档
 
   - 对于大多数有价值的数据删除,大多数使用 `soft dalete`,实现方式参考 `Laravel`
+
+### 数据库配置
+
+> 以下操作推荐使用 [navicat](https://www.navicat.com/en/products)
+
+修改config/config.default.ts文件，并添加
+
+```js
+  // 配置数据库
+  config.sequelize = {
+    dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
+    database: 'echidb',
+    host: 'localhost',
+    port: '3306',
+    username: 'root',
+    password: '你数据库设置的密码',
+  };
+```
+
+```bash
+mysql -u root -p  # 登录
+CREATE DATABASE IF NOT EXISTS `echidb`; # 创建数据库, 注意后面的分号
+```
 
 
 > 开发历程
