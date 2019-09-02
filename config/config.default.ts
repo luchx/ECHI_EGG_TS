@@ -18,8 +18,6 @@ export interface IBizConfig {
     port: string;
     username: string;
     password: string;
-    // 数据库表名前缀
-    tablePrefix: string;
   };
 }
 
