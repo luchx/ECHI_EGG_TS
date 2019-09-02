@@ -6,10 +6,10 @@
 // 18位 校验身份证
 export function TestIdCode(idCode) {
     let code = idCode;
-    //身份证号合法性验证
-    //支持15位和18位身份证号
-    //支持地址编码、出生日期、校验位验证
-    let city = {
+    // 身份证号合法性验证
+    // 支持15位和18位身份证号
+    // 支持地址编码、出生日期、校验位验证
+    const city = {
         11: '北京',
         12: '天津',
         13: '河北',
@@ -44,31 +44,31 @@ export function TestIdCode(idCode) {
         71: '台湾',
         81: '香港',
         82: '澳门',
-        91: '国外 '
+        91: '国外 ',
     };
     let row = {
-        'pass': true,
-        'msg': '验证成功'
+        pass: true,
+        msg: '验证成功',
     };
     if (!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/.test(code)) {
         row = {
-            'pass': false,
-            'msg': '身份证号格式错误'
+            pass: false,
+            msg: '身份证号格式错误',
         };
     } else if (!city[code.substr(0, 2)]) {
         row = {
-            'pass': false,
-            'msg': '身份证号地址编码错误'
+            pass: false,
+            msg: '身份证号地址编码错误',
         };
     } else {
-        //18位身份证需要验证最后一位校验位
+        // 18位身份证需要验证最后一位校验位
         if (code.length === 18) {
             code = code.split('');
-            //∑(ai×Wi)(mod 11)
-            //加权因子
-            let factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-            //校验位
-            let parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
+            // ∑(ai×Wi)(mod 11)
+            // 加权因子
+            const factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
+            // 校验位
+            const parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
             let sum = 0;
             let ai = 0;
             let wi = 0;
@@ -77,12 +77,12 @@ export function TestIdCode(idCode) {
                 wi = factor[i];
                 sum += ai * wi;
             }
-            let parityString = parity[sum % 11];
-            let codeString = code[17].toUpperCase();
+            const parityString = parity[sum % 11];
+            const codeString = code[17].toUpperCase();
             if (parityString.toString() !== codeString.toString()) {
                 row = {
-                    'pass': false,
-                    'msg': '身份证号校验错误'
+                    pass: false,
+                    msg: '身份证号校验错误',
                 };
             }
         }
@@ -92,44 +92,44 @@ export function TestIdCode(idCode) {
 
 // 校验手机
 export function TestPhone(phone) {
-    let reg = /^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(14[5|7]))\d{8}$/;
+    const reg = /^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(14[5|7]))\d{8}$/;
     return reg.test(phone);
 }
 
 // 校验邮箱
 export function TestEmail(email) {
-    let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+    const reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
     return reg.test(email);
 }
 
 // 校验整数
-export function TestInt(num, zero?: Boolean, negative?: Boolean) {
-    //zero 是否包含0，negative是否包含负整数
+export function TestInt(num, zero?: boolean, negative?: boolean) {
+    // zero 是否包含0，negative是否包含负整数
     let reg;
     if (zero) {
-        if (negative)  {
+        if (negative) {
             reg = /^(((\-|\+)?([1-9]\d*))|0)$/;
-        }else  {
+        } else {
             reg = /^((\+?([1-9]\d*))|0)$/;
         }
-    }else {
-        if (negative)  {
+    } else {
+        if (negative) {
             reg = /^(\-|\+)?[1-9][0-9]*$/;
-        }else  {
+        } else {
             reg = /^\+?[1-9][0-9]*$/;
         }
     }
     return reg.test(num);
 }
 
-//校验数值保留小数后一位
+// 校验数值保留小数后一位
 export function TestDecimal(num) {
-    let reg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1})$/;
+    const reg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1})$/;
     return reg.test(num);
 }
 
-//校验数值保留小数后至少n位，最多m位
+// 校验数值保留小数后至少n位，最多m位
 export function TestDecimalFn(num, n, m) {
-    let reg = new RegExp('^(\\-|\\+)?(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){' + n + ',' + m + '})$');
+    const reg = new RegExp('^(\\-|\\+)?(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){' + n + ',' + m + '})$');
     return reg.test(num);
 }

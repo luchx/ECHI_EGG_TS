@@ -12,7 +12,7 @@ export function success(this: Context, message, data = null) {
     this.body = {
         message,
         data,
-        status: true
+        status: true,
     };
     this.status = 200;
 }
@@ -29,6 +29,6 @@ export function fail(this: Context, message, data = null) {
     this.body = {
         message,
         data,
-        status: false
+        status: false,
     };
 }
