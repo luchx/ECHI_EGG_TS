@@ -50,8 +50,6 @@ $ npm stop
 
 ### 数据库配置
 
-> 以下操作推荐使用 [navicat](https://www.navicat.com/en/products)
-
 修改config/config.default.ts文件，并添加
 
 ```js
@@ -65,6 +63,8 @@ $ npm stop
     password: '你数据库设置的密码',
   };
 ```
+
+> 以下操作推荐使用 [navicat](https://www.navicat.com/en/products)
 
 ```bash
 mysql -u root -p  # 登录
