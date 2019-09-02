@@ -4,15 +4,13 @@
  * 会员表
  */
 import { Application } from 'egg';
-import { MEDIUMINT, STRING, TEXT, TINYINT, DATE } from 'sequelize';
 
 export default (app: Application) => {
-  const sequelize = app.model;
-  const tablePrefix = sequelize.options['tablePrefix'];
+  const { INTEGER, STRING, TEXT, DATE } = app.Sequelize;
 
-  const Member = sequelize.define(tablePrefix + 'member', {
+  const Member = app.model.define('echi_member', {
     id: {
-      type: MEDIUMINT(8).UNSIGNED,
+      type: INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -45,7 +43,7 @@ export default (app: Application) => {
     },
 
     gender: {
-      type: TINYINT(1).UNSIGNED,
+      type: INTEGER,
       defaultValue: 2,
       comment: '性别'
     },
@@ -62,12 +60,12 @@ export default (app: Application) => {
     },
 
     shoeSize: {
-      type: TINYINT(100).UNSIGNED,
+      type: INTEGER,
       comment: '鞋码'
     },
 
     seatHeight: {
-      type: TINYINT(10).UNSIGNED,
+      type: INTEGER,
       comment: '座椅高度'
     },
 

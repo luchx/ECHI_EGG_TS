@@ -72,9 +72,7 @@ export default (appInfo: EggAppInfo) => {
     host: 'localhost',
     port: '3306',
     username: 'root',
-    password: 'root',
-
-    tablePrefix: 'echi_',
+    password: 'root'
   };
 
   config.security = {

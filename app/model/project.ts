@@ -4,15 +4,13 @@
  * 课程表
  */
 import { Application } from 'egg';
-import { MEDIUMINT, STRING, FLOAT, BOOLEAN, TEXT, INTEGER, DATE } from 'sequelize';
 
 export default (app: Application) => {
-  const sequelize = app.model;
-  const tablePrefix = sequelize.options['tablePrefix'];
+  const { STRING, FLOAT, BOOLEAN, TEXT, INTEGER, DATE } = app.Sequelize;
 
-  const Project = sequelize.define(tablePrefix + 'project', {
+  const Project = app.model.define('echi_project', {
     id: {
-      type: MEDIUMINT(8).UNSIGNED,
+      type: INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },

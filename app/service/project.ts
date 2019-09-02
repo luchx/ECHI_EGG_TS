@@ -17,7 +17,7 @@ export default class Project extends Service {
     const {
       ctx
     } = this;
-    const result = await ctx.model.Project.create(data);
+    const result = await ctx.model.project.create(data);
     console.log(result)
     ctx.success('修改成功', result);
   }
@@ -32,7 +32,7 @@ export default class Project extends Service {
     const {
       ctx
     } = this;
-    const result = await ctx.model.Project.findAll();
+    const result = await ctx.model.project.findAll();
     ctx.success(null, result);
   }
 }
