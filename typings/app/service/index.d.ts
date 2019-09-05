@@ -2,8 +2,8 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportMember from '../../../app/service/member';
-import ExportProject from '../../../app/service/project';
+import ExportMember from '../../../app/service/Member';
+import ExportProject from '../../../app/service/Project';
 
 declare module 'egg' {
   interface IService {
