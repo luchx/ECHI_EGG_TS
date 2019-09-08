@@ -2,8 +2,8 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportMember from '../../../app/model/Member';
-import ExportProject from '../../../app/model/Project';
+import ExportMember from '../../../app/model/member';
+import ExportProject from '../../../app/model/project';
 
 declare module 'egg' {
   interface IModel {
