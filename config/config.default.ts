@@ -63,28 +63,18 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
-  // 配置数据库
-  config.sequelize = {
-    dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'echidb',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: 'root',
+  // 配置跨域
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
+    },
+    domainWhiteList: ['http://localhost:1993'],
   };
 
-  // 配置跨域
-  // config.security = {
-  //   csrf: {
-  //     enable: false,
-  //     ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
-  //   },
-  //   domainWhiteList: [ 'http://localhost:3001' ],
-  // };
-
-  // config.cors = {
-  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-  // };
+  config.cors = {
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
 
   // the return config will combines to EggAppConfig
   return config;

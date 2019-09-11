@@ -15,4 +15,4 @@ export default (app: Application) => {
       app.logger.info('sync db completed ...');
     }
   });
- };
+};

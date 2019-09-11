@@ -1,15 +1,16 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
-  const { controller, router } = app;
+  const { controller, config } = app;
+  const { apiPrefix } = config;
 
-  router.get('/', controller.home.index);
-  router.get('/member/getTime', controller.member.getTime);
-  router.get('/member/getCode', controller.member.getCode);
-  router.post('/member/login', controller.member.login);
-  router.get('/member/getInfo/:memberId', controller.member.getInfo);
-  router.put('/member/modify', controller.member.modify);
+  app.get('/', controller.home.index);
+  app.get(apiPrefix + '/member/getTime', controller.member.getTime);
+  app.get(apiPrefix + '/member/getCode', controller.member.getCode);
+  app.post(apiPrefix + '/member/login', controller.member.login);
+  app.get(apiPrefix + '/member/getInfo/:memberId', controller.member.getInfo);
+  app.put(apiPrefix + '/member/modify', controller.member.modify);
 
-  router.post('/project/create', controller.project.create);
-  router.get('/project/getProject', controller.project.getProject);
+  app.post(apiPrefix + '/project/create', controller.project.create);
+  app.get(apiPrefix + '/project/getProject', controller.project.getProject);
 };
