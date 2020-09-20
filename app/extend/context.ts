@@ -10,9 +10,10 @@ import { Context } from 'egg';
  */
 export function success(this: Context, message, data = null) {
     this.body = {
-        message,
-        data,
-        status: true,
+        code: 0,
+        result: data,
+        timestamp: +new Date(),
+        message: message,
     };
     this.status = 200;
 }
@@ -27,8 +28,9 @@ export function success(this: Context, message, data = null) {
  */
 export function fail(this: Context, message, data = null) {
     this.body = {
-        message,
-        data,
-        status: false,
+        code: 500,
+        result: data,
+        timestamp: +new Date(),
+        message: message,
     };
 }

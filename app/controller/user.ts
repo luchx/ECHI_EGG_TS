@@ -2,7 +2,7 @@ import {
   Controller,
 } from 'egg';
 
-export default class MemberController extends Controller {
+export default class userController extends Controller {
 
   // 获取当前日期的时间戳
   public async getTime() {
@@ -14,7 +14,7 @@ export default class MemberController extends Controller {
    *
    * @query {string} phone
    * @returns
-   * @memberof MemberController
+   * @userof userController
    */
   public async getCode() {
     const {
@@ -23,7 +23,7 @@ export default class MemberController extends Controller {
     const {
       phone,
     } = ctx.query;
-    return await ctx.service.member.getCode(phone);
+    return await ctx.service.user.getCode(phone);
   }
 
   /**
@@ -32,7 +32,7 @@ export default class MemberController extends Controller {
    * @requestBody {string} phone
    * @requestBody {string} code
    * @returns
-   * @memberof MemberController
+   * @userof userController
    */
   public async login() {
     const {
@@ -42,32 +42,32 @@ export default class MemberController extends Controller {
       phone,
       code,
     } = ctx.request.body;
-    return await ctx.service.member.login(phone, code);
+    return await ctx.service.user.login(phone, code);
   }
 
   /**
    * 获取用户信息
    *
-   * @params {string} memberId
+   * @params {string} userId
    * @returns
-   * @memberof MemberController
+   * @userof userController
    */
   public async getInfo() {
     const {
       ctx,
     } = this;
     const {
-      memberId,
+      userId,
     } = ctx.params;
-    return await ctx.service.member.getInfo(memberId);
+    return await ctx.service.user.getInfo(userId);
   }
 
   /**
    * 修改用户信息
    *
-   * @params {string} memberId
+   * @params {string} userId
    * @returns
-   * @memberof MemberController
+   * @userof userController
    */
   public async modify() {
     const {
@@ -76,7 +76,7 @@ export default class MemberController extends Controller {
     const {
       id,
     } = ctx.request.body;
-    return await ctx.service.member.modify({ id }, ctx.request.body);
+    return await ctx.service.user.modify({ id }, ctx.request.body);
   }
 
 }

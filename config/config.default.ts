@@ -5,7 +5,7 @@ import {
 } from 'egg';
 
 // for config.{env}.ts
-export type DefaultConfig = PowerPartial<EggAppConfig & IBizConfig>;
+export type DefaultConfig = EggAppConfig & IBizConfig;
 
 // app special config scheme
 export interface IBizConfig {
@@ -55,9 +55,10 @@ export default (appInfo: EggAppInfo) => {
       if (errors.length) {
         ctx.status = 400;
         ctx.body = {
-          status: false,
+          code: 400,
           error: errors,
-          message: '参数错误',
+          timestamp: +new Date(),
+          message: "参数错误",
         };
       }
     },
@@ -67,12 +68,13 @@ export default (appInfo: EggAppInfo) => {
   config.security = {
     csrf: {
       enable: false,
-      ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
+      // ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
     },
-    domainWhiteList: ['http://localhost:1993'],
+    domainWhiteList: ["http://localhost:9000"],
   };
 
   config.cors = {
+    origin: 'http://localhost:9000',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
 

@@ -6,9 +6,9 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
-  const { INTEGER, STRING, TEXT, DATE } = app.Sequelize;
+  const { INTEGER, STRING, TEXT } = app.Sequelize;
 
-  const Member = app.model.define('echi_member', {
+  const User = app.model.define('db_user', {
     id: {
       type: INTEGER,
       autoIncrement: true,
@@ -30,10 +30,10 @@ export default (app: Application) => {
       comment: '用户密码',
     },
 
-    nickname: {
-      type: STRING(60),
-      allowNull: false,
-      comment: '昵称',
+    description: {
+      type: TEXT,
+      defaultValue: '',
+      comment: "用户描述"
     },
 
     phone: {
@@ -42,31 +42,10 @@ export default (app: Application) => {
       comment: '手机号码',
     },
 
-    gender: {
+    sex: {
       type: INTEGER,
       defaultValue: 2,
       comment: '性别',
-    },
-
-    genderDisplay: {
-      type: STRING(10),
-      defaultValue: '未知',
-      comment: '性别',
-    },
-
-    birthday: {
-      type: DATE,
-      comment: '生日',
-    },
-
-    shoeSize: {
-      type: INTEGER,
-      comment: '鞋码',
-    },
-
-    seatHeight: {
-      type: INTEGER,
-      comment: '座椅高度',
     },
 
     avatar: {
@@ -81,5 +60,5 @@ export default (app: Application) => {
       charset: 'utf8mb4',
     });
 
-  return Member;
+  return User;
 };

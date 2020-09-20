@@ -90,7 +90,8 @@ export default class Member extends Service {
     if (!result) {
       return;
     }
-    return await ctx.model.member.findOrCreate({
+    console.log("ctx.model.user", ctx.model.user)
+    return await ctx.model.user.findOrCreate({
       where: {
         phone,
       },
@@ -119,7 +120,7 @@ export default class Member extends Service {
     const {
       ctx,
     } = this;
-    const result: any = await ctx.model.member.findOne({
+    const result: any = await ctx.model.user.findOne({
       where: {
         id: memberId,
       },
@@ -153,7 +154,7 @@ export default class Member extends Service {
     const {
       ctx,
     } = this;
-    const result = await ctx.model.member.update(modifyValue, {
+    const result = await ctx.model.user.update(modifyValue, {
       where: query,
     });
     if (!result.length) {
